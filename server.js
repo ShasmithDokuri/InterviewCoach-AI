@@ -6,6 +6,7 @@ const app = express();
 
 app.use(cors());
 app.use(express.json({ limit: "5mb" }));
+app.use(express.static(__dirname));
 
 
 // =========================================================
@@ -416,14 +417,9 @@ function performLocalAnalysis({
 // =========================================================
 
 app.get("/", (req, res) => {
-
-    res.json({
-        success: true,
-        message:
-            "InterviewCoach AI server is running!"
-    });
-
+    res.sendFile(path.join(__dirname, "index.html"));
 });
+
 
 
 // =========================================================
