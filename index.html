@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>InterviewCoach AI</title>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700;9..144,800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+<div class="container">
+
+  <header>
+    <div class="masthead">
+      <div class="mark">IC</div>
+      <div class="masthead-text">
+        <h1>InterviewCoach AI</h1>
+        <p>Prepare smarter. Interview with confidence.</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- =========================
+       PREPARATION
+  ========================== -->
+  <section class="card">
+    <h2><span class="step-index">01</span>Interview Preparation</h2>
+
+    <div class="form-group">
+      <label for="resumeFile">Upload Your Resume</label>
+      <input type="file" id="resumeFile" accept=".pdf">
+      <p id="uploadStatus">Upload your resume as a PDF.</p>
+    </div>
+
+    <div class="form-group">
+      <label for="resume">Resume Information</label>
+      <textarea id="resume" rows="8" placeholder="Your resume information will appear here after uploading your PDF."></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="jobDescription">Job Description</label>
+      <textarea id="jobDescription" rows="8" placeholder="Paste the job description here..."></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="projects">Projects / Portfolio</label>
+      <textarea id="projects" rows="6" placeholder="Describe your projects, GitHub work, portfolio, or other relevant experience..."></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="interviewType">Interview Type</label>
+      <select id="interviewType">
+        <option value="">Select interview type</option>
+        <option value="internship">Internship</option>
+        <option value="part-time">Part-Time Job</option>
+        <option value="full-time">Full-Time Job</option>
+      </select>
+    </div>
+
+    <button id="analyzeButton" type="button">Analyze My Interview</button>
+
+    <p id="result"></p>
+  </section>
+
+  <!-- =========================
+       ANALYSIS
+  ========================== -->
+  <section id="analysis" class="card hidden">
+    <h2><span class="step-index">02</span>Interview Analysis</h2>
+    <div id="analysisContent"></div>
+  </section>
+
+  <!-- =========================
+       QUESTIONS
+  ========================== -->
+  <section id="questions" class="card hidden">
+    <h2><span class="step-index">03</span>Personalized Interview Questions</h2>
+    <div id="questionContent"></div>
+  </section>
+
+  <!-- =========================
+       ANSWER GUIDANCE
+  ========================== -->
+  <section id="answers" class="card hidden">
+    <h2><span class="step-index">04</span>How Should I Answer?</h2>
+    <div id="answerContent"></div>
+  </section>
+
+  <!-- =========================
+       MOCK INTERVIEW
+  ========================== -->
+  <section id="mockInterview" class="card">
+    <h2><span class="step-index">05</span>Mock Interview</h2>
+
+    <p class="mock-description">
+      Practice answering personalized interview questions one at a time.
+    </p>
+
+    <!-- START -->
+    <div id="mockStart">
+      <button id="startMockButton" type="button">Start Mock Interview</button>
+    </div>
+
+    <!-- SESSION -->
+    <div id="mockSession" class="hidden">
+
+      <div class="mock-progress">
+        <span id="mockQuestionNumber">Question 1</span>
+      </div>
+
+      <div class="mock-question">
+        <h3 id="mockQuestion">Your question will appear here.</h3>
+      </div>
+
+      <!-- TEXT ANSWER -->
+      <div class="form-group">
+        <label for="mockAnswer">Your Answer</label>
+        <textarea id="mockAnswer" rows="7" placeholder="Type your answer or use the microphone below..."></textarea>
+      </div>
+
+      <!-- RECORDING CONTROLS -->
+      <div class="recording-area">
+        <div class="recording-status-row">
+          <span class="tally-dot"></span>
+          <div id="recordingStatus" class="recording-status">Ready to record</div>
+        </div>
+
+        <div class="recording-buttons">
+          <button id="startRecordingButton" type="button">🎙️ Start Recording</button>
+          <button id="stopRecordingButton" type="button" disabled>⏹ Stop Recording</button>
+        </div>
+
+      </div>
+
+      <!-- SUBMIT -->
+      <div class="mock-buttons">
+        <button id="submitMockAnswer" type="button">Submit Answer</button>
+        <button id="skipMockQuestion" type="button">Skip Question</button>
+      </div>
+
+    </div>
+
+    <!-- COMPLETE -->
+    <div id="mockComplete" class="hidden">
+      <h3>🎉 Mock Interview Complete</h3>
+      <p id="mockScore"></p>
+      <button id="restartMockButton" type="button">Start Again</button>
+    </div>
+
+  </section>
+
+  <!-- =========================
+       VIDEO INTERVIEW
+  ========================== -->
+  <section id="videoInterview" class="card">
+
+    <h2>
+      <span class="step-index">06</span>
+      Video Interview Analysis
+    </h2>
+
+    <p class="mock-description">
+      Practice your interview with your camera and microphone.
+      Review your delivery and presentation after recording.
+    </p>
+
+    <!-- VIDEO START -->
+    <div id="videoStart">
+
+      <div class="video-intro">
+        <h3>🎥 Practice on Camera</h3>
+
+        <p>
+          Turn on your camera and microphone to practice answering
+          interview questions as if you were in a real interview.
+        </p>
+
+        <button id="startVideoButton" type="button">
+          Start Video Interview
+        </button>
+      </div>
+
+    </div>
+
+    <!-- VIDEO SESSION -->
+    <div id="videoSession" class="hidden">
+
+      <div class="video-question-area">
+
+        <div class="mock-progress">
+          <span id="videoQuestionNumber">Question 1</span>
+        </div>
+
+        <div class="mock-question">
+          <h3 id="videoQuestion">
+            Your interview question will appear here.
+          </h3>
+        </div>
+
+      </div>
+
+      <!-- CAMERA -->
+      <div class="video-container">
+
+        <video
+          id="videoPreview"
+          autoplay
+          muted
+          playsinline>
+        </video>
+
+        <div id="videoStatus" class="video-status">
+          Camera ready
+        </div>
+
+      </div>
+
+      <!-- VIDEO CONTROLS -->
+      <div class="video-controls">
+
+        <button id="startVideoRecordingButton" type="button">
+          🔴 Start Recording
+        </button>
+
+        <button
+          id="stopVideoRecordingButton"
+          type="button"
+          disabled>
+          ⏹ Stop Recording
+        </button>
+
+      </div>
+
+      <!-- VIDEO RECORDING PREVIEW -->
+      <div id="recordedVideoArea" class="hidden">
+
+        <h3>Recorded Interview</h3>
+
+        <video
+          id="recordedVideo"
+          controls
+          playsinline>
+        </video>
+
+      </div>
+
+      <!-- VIDEO ANALYSIS -->
+      <div id="videoAnalysis" class="hidden">
+
+        <h3>Video Interview Feedback</h3>
+
+        <div id="videoAnalysisContent"></div>
+
+      </div>
+
+      <!-- EXIT -->
+      <div class="mock-buttons">
+
+        <button
+          id="stopVideoInterviewButton"
+          type="button">
+          End Video Interview
+        </button>
+
+      </div>
+
+    </div>
+
+  </section>
+
+</div>
+
+<script src="adaptive-engine.js"></script>
+<script src="resume-match.js"></script>
+<script src="interview-history.js"></script>
+<script src="progress-dashboard.js"></script>
+<script src="script.js"></script>
+<script src="interview-history-connector.js"></script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+# Environment variables and secrets
+.env
+.env.*
+
+# Dependencies
+node_modules/
+
+# macOS
+.DS_Store
+
+# Project backups
+*-backup.js
+*-backup.html
+*-backup.css
+*-before-*.js
+*-before-*.html
+*-before-*.css
